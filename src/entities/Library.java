@@ -1,3 +1,4 @@
+package entities;
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -57,7 +58,7 @@ public class Library {
 
     @Override
     public String toString() {
-        return "Library{" +
+        return "entities.Library{" +
                 "books=" + Arrays.toString(books) +
                 ", readers=" + Arrays.toString(readers) +
                 '}';

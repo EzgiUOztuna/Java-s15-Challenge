@@ -1,7 +1,11 @@
-public class Author extends Person{
+package entities;
+
+public class Author extends Person {
     private String[] books;
 
-    public Author() {
+    public Author(String name, String[] books) {
+        super(name);
+        this.books=books;
 
     }
     public Author(String[] books) {
@@ -24,7 +28,9 @@ public class Author extends Person{
 
     }
 
+    @Override
     public void whoYouAre() {
+        System.out.println("I'm an author. My name is " + getName());
 
     }
 }

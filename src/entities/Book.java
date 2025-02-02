@@ -1,8 +1,10 @@
+package entities;
+
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class Book {
-    private long book_ID;
+public abstract class Book {
+    private long bookId;
     private String author;
     private String name;
     private double price;
@@ -13,8 +15,8 @@ public class Book {
     public Book() {
 
     }
-    public Book(long book_ID, String author, String name, double price, String status, int edition, LocalDate dateOfPurchase) {
-        this.book_ID = book_ID;
+    public Book(long bookId, String author, String name, double price, String status, int edition, LocalDate dateOfPurchase) {
+        this.bookId = bookId;
         this.author = author;
         this.name = name;
         this.price = price;
@@ -25,8 +27,8 @@ public class Book {
 
     //***********************************************************************
 
-    public long getBook_ID() {
-        return book_ID;
+    public long getBookId() {
+        return bookId;
     }
 
     public String getAuthor() {
@@ -55,24 +57,26 @@ public class Book {
 
     //***********************************************************************
 
-    public void getTitle() {
-
+    public String getTitle() {
+        return name;
     }
 
     public void changeOwner(){
-
     }
 
     public void getOwner() {
 
     }
 
-    public void display() {
-
-    }
+    public abstract void display();
+    public abstract double calculateFine(int daysLate);
 
     public void updateStatus() {
 
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     //***********************************************************************
@@ -81,18 +85,18 @@ public class Book {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Book book = (Book) o;
-        return book_ID == book.book_ID && Double.compare(price, book.price) == 0 && edition == book.edition && Objects.equals(author, book.author) && Objects.equals(name, book.name) && Objects.equals(status, book.status) && Objects.equals(dateOfPurchase, book.dateOfPurchase);
+        return bookId == book.bookId && Double.compare(price, book.price) == 0 && edition == book.edition && Objects.equals(author, book.author) && Objects.equals(name, book.name) && Objects.equals(status, book.status) && Objects.equals(dateOfPurchase, book.dateOfPurchase);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(book_ID, author, name, price, status, edition, dateOfPurchase);
+        return Objects.hash(bookId, author, name, price, status, edition, dateOfPurchase);
     }
 
     @Override
     public String toString() {
-        return "Book{" +
-                "book_ID=" + book_ID +
+        return "entities.Book{" +
+                "bookId=" + bookId +
                 ", author='" + author + '\'' +
                 ", name='" + name + '\'' +
                 ", price=" + price +
@@ -101,6 +105,4 @@ public class Book {
                 ", dateOfPurchase=" + dateOfPurchase +
                 '}';
     }
-
-
 }

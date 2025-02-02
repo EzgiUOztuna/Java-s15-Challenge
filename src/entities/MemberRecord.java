@@ -1,4 +1,7 @@
+package entities;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class MemberRecord {
@@ -10,10 +13,8 @@ public class MemberRecord {
     private String name;
     private String address;
     private long phoneNo;
+    private List<Book> borrowedBooks;
 
-    public MemberRecord(){
-
-    }
     public MemberRecord(long memberID, String type, LocalDate dateOfMembership, String noBooksIssued, int maxBookLimit, String name, String address, long phoneNo) {
         this.memberID = memberID;
         this.type = type;
@@ -23,6 +24,7 @@ public class MemberRecord {
         this.name = name;
         this.address = address;
         this.phoneNo = phoneNo;
+        this.borrowedBooks = new ArrayList<>();
     }
 
     //***********************************************************************
@@ -59,6 +61,10 @@ public class MemberRecord {
         return phoneNo;
     }
 
+    public List<Book> getBorrowedBooks(){
+        return borrowedBooks;
+    }
+
     //***********************************************************************
 
     public void getMember(){
@@ -77,6 +83,29 @@ public class MemberRecord {
 
     }
 
+    public void borrowBook(Book book){
+        if(borrowedBooks.size() < 5) {
+            borrowedBooks.add(book);
+            book.setStatus("Borrowed");
+            System.out.println("Book borrowed successfully: " + book.getName());
+        } else {
+            System.out.println("You can't borrow more than 5 books.");
+        }
+    }
+
+    public void returnBook(Book book, int daysLate){
+        if(borrowedBooks.contains(book)) {
+            borrowedBooks.remove(book);
+            book.setStatus("Available");
+
+            double fine = book.calculateFine(daysLate);
+            System.out.println("Book returned: " + book.getName());
+            System.out.println("Fine to pay: " + fine);
+        } else {
+            System.out.println("This book wasn't borrowed.");
+        }
+    }
+
     //***********************************************************************
 
     @Override
@@ -93,7 +122,7 @@ public class MemberRecord {
 
     @Override
     public String toString() {
-        return "MemberRecord{" +
+        return "entities.MemberRecord{" +
                 "memberID=" + memberID +
                 ", type='" + type + '\'' +
                 ", dateOfMembership=" + dateOfMembership +

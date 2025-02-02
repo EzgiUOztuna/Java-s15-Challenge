@@ -1,7 +1,9 @@
+package entities;
+
 import java.util.Arrays;
 import java.util.Objects;
 
-public class Reader extends Person{
+public class Reader extends Person {
     private String[] books;
 
     public Reader() {
@@ -56,7 +58,7 @@ public class Reader extends Person{
 
     @Override
     public String toString() {
-        return "Reader{" +
+        return "entities.Reader{" +
                 "books=" + Arrays.toString(books) +
                 '}';
     }

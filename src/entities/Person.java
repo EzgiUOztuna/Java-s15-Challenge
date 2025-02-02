@@ -1,3 +1,5 @@
+package entities;
+
 import java.util.Objects;
 
 public class Person {
@@ -39,7 +41,7 @@ public class Person {
 
     @Override
     public String toString() {
-        return "Person{" +
+        return "entities.Person{" +
                 "name='" + name + '\'' +
                 '}';
     }
